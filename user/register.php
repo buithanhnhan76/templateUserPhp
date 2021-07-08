@@ -93,9 +93,9 @@
                         <input class="form-control" name="repeatpassword" placeholder="Nhập lại password" type="password" required>
                     </div> <!-- form-group// -->
                     <div class="form-group">
-                        <button type="submit" name="submit" class="btn btn-primary btn-block"> Create Account </button>
+                        <button type="submit" name="submit" class="btn btn-primary btn-block"> Tạo tài khoản </button>
                     </div> <!-- form-group// -->
-                    <p class="text-center">Have an account? <a href="./login.php">Log In</a> </p>
+                    <p class="text-center">Đã có tài khoản? <a href="./login.php">Đăng nhập</a> </p>
                     <div id="error" class="alert alert-danger" style="display: none"></div>
                     <div id="success" class="alert alert-success" style="display: none"></div>
                 </form>
@@ -124,9 +124,30 @@ if ($conn->connect_error) {
 
 if (isset($_POST["submit"])) {
     $username = $_POST["username"];
-    $password = $_POST["password"];
     $email = $_POST["email"];
+    $password = $_POST["password"];
     $repeatpassword = $_POST["repeatpassword"];
+
+     // check if user exists
+     $checkusername = "select * from usser where username='".$username ."'";
+     $result = $conn->query($checkusername);
+     if ($result->num_rows > 0)
+     {
+         echo "<script>document.getElementById('error').innerHTML='Username đã tồn tại !';
+         document.getElementById('error').style.display='block'</script>";
+         die();
+     };
+
+     // check if email exists
+     $checkemail = "select * from usser where email='".$email ."'";
+     $result = $conn->query($checkemail);
+     if ($result->num_rows > 0)
+     {
+         echo "<script>document.getElementById('error').innerHTML='Email đã được dùng !';
+         document.getElementById('error').style.display='block'</script>";
+         die();
+     };
+
     if ($password != $repeatpassword)
         echo "<script>document.getElementById('error').innerHTML='Password khác nhau, vui lòng kiểm tra lại'</script>
     <script>document.getElementById('error').style.display='block'</script>";
@@ -138,7 +159,7 @@ if (isset($_POST["submit"])) {
             echo "<script>document.getElementById('success').innerHTML='Đăng Kí Thành Công'</script>
         <script>document.getElementById('success').style.display='block'</script>";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Đã xảy ra lỗi trong quá trình tạo tài khoản, vui lòng liên hệ admin để được hỗ trợ";
         }
 
         $conn->close();
@@ -147,3 +168,5 @@ if (isset($_POST["submit"])) {
 
 
 ?>
+
+<!-- done register -->

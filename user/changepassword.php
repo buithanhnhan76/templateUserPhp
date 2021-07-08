@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +22,8 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
-                <p class="text-center">Đổi Mật Khẩu.</p>
+                <p class="text-left">Xin chào <?php echo strtoupper($_SESSION["username"])?></p>
+                <p class="text-left">Bạn muốn đổi mật khẩu ?</p>
                 <form method="post" id="passwordForm">
                     <input type="password" class="input-lg form-control" name="password" id="password1" placeholder="New Password" autocomplete="off">
                     <input type="password" class="input-lg form-control mt-3 mb-3" name="repeatpassword" id="password2" placeholder="Repeat Password" autocomplete="off">
@@ -27,7 +31,9 @@
                     <br>
                     <br>
                     <a href="../user/" class="btn btn-primary">Về trang chủ</a>
-                    <div id="noti" style="display:none"></div>
+                    <br>
+                    <br>
+                    <div id="noti" style="display:none" class="btn btn-success"></div>
                 </form>
             </div>
             <!--/col-sm-6-->
@@ -38,7 +44,6 @@
 
 </html>
 <?php
-session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -73,5 +78,6 @@ if (isset($_POST["submit"])) {
     }
 }
 
-
 ?>
+
+<!-- done changepassword -->

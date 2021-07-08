@@ -44,7 +44,7 @@
                                         <br>
                                         <a href="../user/" class="btn btn-primary mt-3">Về Trang Chủ</a>
                                     </div>
-                                    <div id="noti" style="display:none;"></div>
+                                    <div id="noti" class="btn btn-success" style="display:none;"></div>
                                 </form>
                             </div>
                         </div>
@@ -84,7 +84,20 @@ if ($conn->connect_error) {
 }
 
 if (isset($_POST["submit"])) {
+    // get email
     $email = $_POST["email"];
+    
+    // check if email exists
+    $checkemail = "select * from usser where email='".$email ."'";
+    $result = $conn->query($checkemail);
+    if ($result->num_rows == 0)
+    {
+        echo "<script>document.getElementById('noti').innerHTML='Email Không Tồn Tại !';
+        document.getElementById('noti').style.display='block'</script>";
+        die();
+    };
+
+    // hash a new password
     $hash = rand_string(5);
     $to_email = $email;
     $subject = 'Reset Password';
@@ -108,3 +121,5 @@ if (isset($_POST["submit"])) {
 
 
 ?>
+
+<!-- done forget password -->

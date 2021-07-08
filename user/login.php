@@ -28,7 +28,7 @@
     #login .container #login-row #login-column #login-box {
     margin-top: 120px;
     max-width: 600px;
-    height: 320px;
+    height: 360px;
     border: 1px solid #9C9C9C;
     background-color: #EAEAEA;
     }
@@ -62,7 +62,7 @@
                                 <input type="submit" name="login" class="btn btn-info btn-md" value="Login">
                                 <a href="./forgotpassword.php" class="btn btn-info">Quên Mật Khẩu</a>
                             </div>
-                            <div class="success"></div>
+                            <div id="noti" class="alert alert-success" style="display:none" ></div>
                             <div></div>
                             <!-- <div id="register-link" class="text-right">
                                 <a href="#" class="text-info">Register here</a>
@@ -109,15 +109,20 @@ if(isset($_POST["login"]))
                   header("Location: ../user");
                 }
         }
+        echo "<script>document.getElementById('noti').innerHTML='Mật Khẩu Không Chính Xác, Vui Lòng Kiểm Tra Lại';
+        document.getElementById('noti').style.display='block'</script>";
         } else {
         // Tài khoản không tồn tai
-        echo "Tài Khoản Không Tồn Tại";
+        echo "<script>document.getElementById('noti').innerHTML='Tài Khoản Không Tồn Tại, Vui Lòng Kiểm Tra Lại';
+        document.getElementById('noti').style.display='block'</script>";
         }
         $conn->close();
 }
 
 
 ?>
+
+<!-- done login -->
 
 
 
