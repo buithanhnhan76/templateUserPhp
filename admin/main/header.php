@@ -27,11 +27,15 @@
     <ul class="nav pull-right top-menu">
       <!-- user login dropdown start-->
       <li class="dropdown">
+        <?php
+        session_start();
+        if(isset($_SESSION['adminname']))
+        echo '
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <span class="profile-ava">
             <img alt="" src="../../public/image/administrator.png">
           </span>
-          <span class="username">Admin Name</span>
+          <span class="username">'.$_SESSION["adminname"] .'</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu extended logout">
@@ -40,9 +44,13 @@
             <a href="#"><i class="icon_profile"></i> My Profile</a>
           </li>
           <li>
-            <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
+            <a href="../logout.php"><i class="icon_key_alt"></i> Log Out</a>
           </li>
         </ul>
+        ';
+        else 
+          echo "<a href='../login.php' >Đăng Nhập</a>";
+        ?>
       </li>
       <!-- user login dropdown end -->
     </ul>
