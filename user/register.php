@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <!-- bootstrap -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-
+    <!-- fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <!-- internal style from template -->
     <style>
         .divider-text {
             position: relative;
@@ -48,26 +49,18 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <br>
         <p class="text-center">Đăng Kí Tài Khoản</p>
         <hr>
-
         <div class="card bg-light">
             <article class="card-body mx-auto" style="max-width: 400px;">
                 <h4 class="card-title mt-3 text-center">Tạo Tài Khoản</h4>
                 <p class="text-center">Bắt Đầu Với Tài Khoản Miễn Phí</p>
-                <!-- <p>
-		<a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
-		<a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
-	</p> -->
-                <!-- <p class="divider-text">
-        <span class="bg-light">OR</span>
-    </p> -->
+                <!-- register form -->
                 <form method="POST">
-                    <!-- form-group// -->
+                    <!-- form-group -->
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
@@ -85,16 +78,19 @@
                             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                         </div>
                         <input class="form-control" name="password" placeholder="Nhập password" type="password" required>
-                    </div> <!-- form-group// -->
+                    </div>
+                    <!-- form-group// -->
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                         </div>
                         <input class="form-control" name="repeatpassword" placeholder="Nhập lại password" type="password" required>
-                    </div> <!-- form-group// -->
+                    </div>
+                    <!-- form-group// -->
                     <div class="form-group">
                         <button type="submit" name="submit" class="btn btn-primary btn-block"> Tạo tài khoản </button>
-                    </div> <!-- form-group// -->
+                    </div>
+                    <!-- form-group// -->
                     <p class="text-center">Đã có tài khoản? <a href="./login.php">Đăng nhập</a> </p>
                     <div id="error" class="alert alert-danger" style="display: none"></div>
                     <div id="success" class="alert alert-success" style="display: none"></div>
@@ -108,7 +104,7 @@
 </body>
 
 </html>
-
+<!-- handle register form -->
 <?php
 $servername = "localhost";
 $username = "root";
@@ -148,13 +144,15 @@ if (isset($_POST["submit"])) {
          die();
      };
 
+    // if password and repeatpassword are not same
     if ($password != $repeatpassword)
         echo "<script>document.getElementById('error').innerHTML='Password khác nhau, vui lòng kiểm tra lại'</script>
-    <script>document.getElementById('error').style.display='block'</script>";
+        <script>document.getElementById('error').style.display='block'</script>";
     else {
+    // insert to database
         $sql = "INSERT INTO usser(username,password,email)
         VALUES ('$username', '$password', '$email')";
-
+    // register successfully
         if ($conn->query($sql) === TRUE) {
             echo "<script>document.getElementById('success').innerHTML='Đăng Kí Thành Công'</script>
         <script>document.getElementById('success').style.display='block'</script>";

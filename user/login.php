@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Login</title>
      <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -18,26 +18,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- internal styles -->
     <style>
-    body {
-    margin: 0;
-    padding: 0;
-    background-color: #17a2b8;
-    height: 100vh;
-    }
-    #login .container #login-row #login-column #login-box {
-    margin-top: 120px;
-    max-width: 600px;
-    height: 360px;
-    border: 1px solid #9C9C9C;
-    background-color: #EAEAEA;
-    }
-    #login .container #login-row #login-column #login-box #login-form {
-    padding: 20px;
-    }
-    #login .container #login-row #login-column #login-box #login-form #register-link {
-    margin-top: -85px;
-    }
+        body {
+        margin: 0;
+        padding: 0;
+        background-color: #17a2b8;
+        height: 100vh;
+        }
+        #login .container #login-row #login-column #login-box {
+        margin-top: 120px;
+        max-width: 600px;
+        height: 360px;
+        border: 1px solid #9C9C9C;
+        background-color: #EAEAEA;
+        }
+        #login .container #login-row #login-column #login-box #login-form {
+        padding: 20px;
+        }
+        #login .container #login-row #login-column #login-box #login-form #register-link {
+        margin-top: -85px;
+        }
     </style>
 </head>
 <body>
@@ -58,15 +59,13 @@
                                 <input type="password" name="password" id="password" class="form-control" required>
                             </div>
                             <div class="form-group">
+                                <!-- currently not use remember me button-->
                                 <!-- <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br> -->
                                 <input type="submit" name="login" class="btn btn-info btn-md" value="Login">
                                 <a href="./forgotpassword.php" class="btn btn-info">Quên Mật Khẩu</a>
                             </div>
+                            <!-- hide the notification -->
                             <div id="noti" class="alert alert-success" style="display:none" ></div>
-                            <div></div>
-                            <!-- <div id="register-link" class="text-right">
-                                <a href="#" class="text-info">Register here</a>
-                            </div> -->
                         </form>
                     </div>
                 </div>
@@ -114,8 +113,9 @@ if(isset($_POST["login"]))
         } else {
         // Tài khoản không tồn tai
         echo "<script>document.getElementById('noti').innerHTML='Tài Khoản Không Tồn Tại, Vui Lòng Kiểm Tra Lại';
-        document.getElementById('noti').style.display='block'</script>";
+              document.getElementById('noti').style.display='block'</script>";
         }
+        // close connection
         $conn->close();
 }
 

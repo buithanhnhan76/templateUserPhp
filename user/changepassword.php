@@ -1,9 +1,9 @@
 <?php 
+// start session at the start of page
 session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,10 +15,8 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
 </head>
-
 <body>
 
-    <!------ Include the above in your HEAD tag ---------->
     <div class="container mt-3">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
@@ -36,9 +34,7 @@ session_start();
                     <div id="noti" style="display:none" class="btn btn-success"></div>
                 </form>
             </div>
-            <!--/col-sm-6-->
         </div>
-        <!--/row-->
     </div>
 </body>
 
@@ -55,21 +51,22 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 if (isset($_POST["submit"])) {
     $password = $_POST["password"];
     $repeatpassword = $_POST["repeatpassword"];
+    // password is different from repeat password
     if ($password != $repeatpassword)
         echo "<script>document.getElementById('noti').innerHTML='Password khác nhau, vui lòng kiểm tra lại'</script>
-    <script>document.getElementById('noti').style.display='block'</script>";
+              <script>document.getElementById('noti').style.display='block'</script>";
     else {
+        // update db
         $sql = "update usser
         set password='" . $password . "'
         where username='" . $_SESSION['username'] . "'";
-
+        // update successfully
         if ($conn->query($sql) === TRUE) {
             echo "<script>document.getElementById('noti').innerHTML='Đổi Mật Khẩu Thành Công'</script>
-        <script>document.getElementById('noti').style.display='block'</script>";
+                  <script>document.getElementById('noti').style.display='block'</script>";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }

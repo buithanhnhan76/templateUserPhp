@@ -6,11 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quên Mật Khẩu</title>
+    <!-- bootstrap -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!-- jquery -->
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
+    <!-- fontawesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- internal styles -->
     <style>
         .form-gap {
             padding-top: 70px;
@@ -31,7 +34,6 @@
                             <p>Bạn có thể khởi tạo lại mật khẩu tại đây.</p>
                             <div class="panel-body">
                                 <form id="register-form" role="form" autocomplete="off" class="form" method="post">
-
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
@@ -59,7 +61,7 @@
 
 <?php
 
-// Hash mot chuoi ki tu ngau nhien, $length la do dai chuoi
+// Random mot chuoi ki tu ngau nhien lam mat khau moi, $length la do dai chuoi
 function rand_string($length)
 {
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -97,7 +99,7 @@ if (isset($_POST["submit"])) {
         die();
     };
 
-    // hash a new password
+    // random a new password
     $hash = rand_string(5);
     $to_email = $email;
     $subject = 'Reset Password';
@@ -105,10 +107,11 @@ if (isset($_POST["submit"])) {
     $headers = 'From: webbangiay';
     mail($to_email, $subject, $message, $headers);
 
+    // update password in db with new password
     $sql = "update usser
         set password = '" . $hash . "'
         where Email ='" . $email . "'";
-
+    // if update success
     if ($conn->query($sql) === TRUE) {
         echo "<script>document.getElementById('noti').innerHTML='Mật Khẩu Mới Đã Được Chuyển Vào Hộp Thư';
             document.getElementById('noti').style.display='block';</script>";
